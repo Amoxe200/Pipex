@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:28:12 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/08 17:31:40 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/09 15:30:38 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ size_t	ft_strlen(const char *s)
 	while (s[len] != '\0')
 		len++;
 	return (len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s != (unsigned char)c)
+	{
+		if (!*s++)
+			return (0);
+	}
+	return ((char *)s);
 }
