@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:24 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/12 21:26:50 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/12 23:04:24 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,13 @@
 //         return(perror("Fork : "));
 //     // child one takes infile and cmd1
 //     //if (child1 == 0)
-//         child_one(f1, argv, end, ag);
-//     child2 = fork();
-//     if (child2 < 0)
+//         ld_one(f1, argv, end, ag);
+//     child2 < 0)
 //         return(perror("Fork : "));
 //     // takes outfile and cmd2
 //     if (child2 == 0)
-//         child_two(f2, ag.cmd_two);
-
-//     waitpid(child1, &status, 0); // supervising the children 
-//     waitpid(child2, &status, 0); // while they finish their tasks 
+//         child_two(f2, agtwo)&status, 0); // supervising the children 
+//     waitpid(chic2, &status, // while they finish their tasks 
 //     dup2(f2, STDOUT_FILENO);
 //     dup2(end[0], STDIN_FILENO);
 //     close(end[0]); // parent
@@ -48,6 +45,7 @@
 
 void parser(char **argv, char **envp, t_list *ag)
 {
+
      // retrieve the path line from envp 
     ag->path_envp =  find_path(envp);
     // retrieve all the possible path from envp
@@ -56,16 +54,20 @@ void parser(char **argv, char **envp, t_list *ag)
     ag->my_cmd = ft_split(argv[2], ' ');
     // split second command
     ag->cmd_two = ft_split(argv[3], ' ');
-
 }
 
 int main(int ac, char **argv, char **envp)
 {
     int f1;
     int f2;
+    int end[2];
+    int status;
+    pid_t child1;
+    pid_t child2;
 
     t_list ag;
 
+    pipe(end);
     if (ac != 5)
     {
         printf("Error In Args\n");
@@ -80,54 +82,22 @@ int main(int ac, char **argv, char **envp)
     }
     parser(argv, envp, &ag);
 
-
-     int end[2];
-    int status;
-    pid_t child1;
-    pid_t child2;
-    
-    pipe(end);
-
     child1 = fork();
     // child one takes infile and cmd1
     if (child1 == 0)
-    {
-        // int i;
-	    // char *cmd;
-	
-	    // i = -1;
-	    dup2(f1, STDIN_FILENO);
-	    dup2(end[1], STDOUT_FILENO);
-        execvp(ag.my_cmd[0],ag.my_cmd);
-     
-       exit(1);
-    }
+        child_one(f1, argv, end, &ag, envp);
     close(end[1]);
     child2 = fork();
-
     // takes outfile and cmd2
     if (child2 == 0)
-        {
-                
-        // int i;
-	// char *cmd;
-	
-	// i = -1;
-
-	
-	 dup2(end[0], STDIN_FILENO);
-	 dup2(f2, STDOUT_FILENO);
-       execvp(ag.cmd_two[0],ag.cmd_two);
-    exit(2);
-        }
+        child_two(f2, &ag, end, argv, envp);
 
     waitpid(child1, &status, 0); // supervising the children 
-    waitpid(child2, &status, 0); // while they finish their tasks
+    // waitpid(child2, &status, 0); // while they finish their tasks
     
     close(end[0]); // parent
     close(end[1]); // it do nothing so close it
     close(f2);
-    exit(EXIT_FAILURE);
  
     return (0);
 }
