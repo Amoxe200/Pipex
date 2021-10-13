@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aaqari <aaqari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:27 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/12 22:52:50 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 19:12:15 by aaqari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 
@@ -39,5 +40,6 @@ int		comp_str(char *str1, char *str2);
 void	child_one(int f1, char **argv, int end[2], t_list *ag, char **envp);
 void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp);
 char	*ft_strjoin(char const *s1, char const *s2);
+
 
 #endif

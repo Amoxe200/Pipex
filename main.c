@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aaqari <aaqari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:24 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 16:43:52 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 17:34:07 by aaqari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,9 @@ int main(int ac, char **argv, char **envp)
     // takes outfile and cmd2
     if (child2 == 0)
         child_two(5, &ag, end, argv, envp);
-
-
-    dprintf(2, "za3im is the boss\n");
     close(end[0]); // parent
     close(end[1]); // it do nothing so close it
     waitpid(child1, &status1, 0); // supervising the children 
-    if(WIFSIGNALED(status1))
-{
-    dprintf(2,"%dppppppppppppdppppppppppppppp\n",WTERMSIG(status));
-} 
     waitpid(child2, &status, 0); // while they finish their tasks
-     if(WIFSIGNALED(status1))
-{
-    dprintf(2,"%dppppppppppppdppppppppppppppp\n",WTERMSIG(status));
-} 
     return (0);
 }

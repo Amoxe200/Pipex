@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aaqari <aaqari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:02:50 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 16:45:51 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 19:11:30 by aaqari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	child_one(int f1, char **argv, int end[2], t_list *ag, char **envp)
 		char *cmd;
 		
     	f1 = open(argv[1], O_RDONLY, 0644);
-		dprintf(2, "laaaa");
 		i = -1;
 		dup2(f1, STDIN_FILENO);
 	    dup2(end[1], STDOUT_FILENO);
@@ -41,7 +40,6 @@ void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp)
 {
 	int i;
 	char *cmd;
-		dprintf(2, "bbbbbbaaaa");
     f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	i = -1;
 	dup2(end[0], STDIN_FILENO);
@@ -56,10 +54,13 @@ void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp)
 	{
 		cmd = ft_strjoin(ag->my_path[i], "/");
 		cmd = ft_strjoin(cmd, ag->cmd_two[0]);
-		execve(cmd, ag->cmd_two, envp);
+		if (execve(cmd, ag->cmd_two, envp) == -1)
+		{
+			dprintf(2, "%s", strerror(errno));
+			write(2, "error exeve\n", ft_strlen("error exeve\n"));
+		}
 		free(cmd);
 	}
-		perror("sidi  za3im");
-		exit(1);
-
+	perror("sidi  za3im");
+	exit(1);
 }
