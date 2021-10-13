@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:24 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/12 23:04:24 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 15:54:46 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void parser(char **argv, char **envp, t_list *ag)
 
 int main(int ac, char **argv, char **envp)
 {
-    int f1;
-    int f2;
+    // int f1;
+    // int f2;
     int end[2];
     int status;
     pid_t child1;
@@ -73,31 +73,28 @@ int main(int ac, char **argv, char **envp)
         printf("Error In Args\n");
         exit(1);
     }
-    f1 = open(argv[1], O_RDONLY, 0644);
-    f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-    if (f1 < 0  || f2 < 0)
-    {
-        printf("Error in file\n");
-        return (-1);
-    }
+    // if (f1 < 0  || f2 < 0)
+    // {
+    //     printf("Error in file\n");
+    //     return (-1);
+    // }
     parser(argv, envp, &ag);
 
     child1 = fork();
     // child one takes infile and cmd1
     if (child1 == 0)
-        child_one(f1, argv, end, &ag, envp);
+        child_one(9, argv, end, &ag, envp);
     close(end[1]);
     child2 = fork();
     // takes outfile and cmd2
     if (child2 == 0)
-        child_two(f2, &ag, end, argv, envp);
+        child_two(5, &ag, end, argv, envp);
 
-    waitpid(child1, &status, 0); // supervising the children 
-    // waitpid(child2, &status, 0); // while they finish their tasks
-    
+
+    dprintf(2, "za3im 3ahira\n");
     close(end[0]); // parent
     close(end[1]); // it do nothing so close it
-    close(f2);
- 
+    waitpid(child1, &status, 0); // supervising the children 
+    waitpid(child2, &status, 0); // while they finish their tasks
     return (0);
 }
