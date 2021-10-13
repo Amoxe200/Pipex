@@ -6,7 +6,7 @@
 /*   By: aaqari <aaqari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:02:50 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 19:11:30 by aaqari           ###   ########.fr       */
+/*   Updated: 2021/10/13 20:07:14 by aaqari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,17 @@ void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp)
     f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	i = -1;
 	dup2(end[0], STDIN_FILENO);
-	close(end[1]);
+	close(end[0]);
 	(void)argv;
 	dup2(f2, STDOUT_FILENO);
 	close(f2);
-	close(end[0]);
 	close(end[1]);
 	(void)argv;
 	while (ag->my_path[++i])
 	{
 		cmd = ft_strjoin(ag->my_path[i], "/");
 		cmd = ft_strjoin(cmd, ag->cmd_two[0]);
-		if (execve(cmd, ag->cmd_two, envp) == -1)
-		{
-			dprintf(2, "%s", strerror(errno));
-			write(2, "error exeve\n", ft_strlen("error exeve\n"));
-		}
+		execve(cmd, ag->cmd_two, envp);
 		free(cmd);
 	}
 	perror("sidi  za3im");
