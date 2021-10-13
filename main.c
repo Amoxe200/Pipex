@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:24 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 15:54:46 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 16:43:52 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int main(int ac, char **argv, char **envp)
     // int f1;
     // int f2;
     int end[2];
+    int status1;
     int status;
+
     pid_t child1;
     pid_t child2;
 
@@ -91,10 +93,18 @@ int main(int ac, char **argv, char **envp)
         child_two(5, &ag, end, argv, envp);
 
 
-    dprintf(2, "za3im 3ahira\n");
+    dprintf(2, "za3im is the boss\n");
     close(end[0]); // parent
     close(end[1]); // it do nothing so close it
-    waitpid(child1, &status, 0); // supervising the children 
+    waitpid(child1, &status1, 0); // supervising the children 
+    if(WIFSIGNALED(status1))
+{
+    dprintf(2,"%dppppppppppppdppppppppppppppp\n",WTERMSIG(status));
+} 
     waitpid(child2, &status, 0); // while they finish their tasks
+     if(WIFSIGNALED(status1))
+{
+    dprintf(2,"%dppppppppppppdppppppppppppppp\n",WTERMSIG(status));
+} 
     return (0);
 }
