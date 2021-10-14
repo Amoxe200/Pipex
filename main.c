@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:20:24 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 20:04:08 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/14 17:58:00 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int main(int ac, char **argv, char **envp)
     // takes outfile and cmd2
     if (child2 == 0)
         child_two(5, &ag, end, argv, envp);
-
     close(end[0]); // parent
     close(end[1]); // it do nothing so close it
     waitpid(child1, &status1, 0); // supervising the children 
