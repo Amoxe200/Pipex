@@ -6,7 +6,7 @@
 /*   By: amoxe <amoxe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:02:50 by amoxe             #+#    #+#             */
-/*   Updated: 2021/10/13 16:45:51 by amoxe            ###   ########.fr       */
+/*   Updated: 2021/10/13 20:04:28 by amoxe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp)
 {
 	int i;
 	char *cmd;
-		dprintf(2, "bbbbbbaaaa");
     f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	i = -1;
 	dup2(end[0], STDIN_FILENO);
