@@ -30,10 +30,10 @@ typedef struct s_list
 } t_list;
 
 
-size_t	ft_strlen(const char *s);
+int     ft_strlen(const char *s);
 void	pipex(int f1, int f2, t_list ag, char **argv);
 char	**ft_split(char const *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 char	*find_path(char  **envp);
 int		comp_str(char *str1, char *str2);

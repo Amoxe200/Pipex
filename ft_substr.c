@@ -12,10 +12,10 @@
 
 #include "header.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, size_t len)
 {
 	char			*p;
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -35,9 +35,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (char *)(p);
 }
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t len;
+	int len;
 
 	len = 0;
 	while (s[len] != '\0')

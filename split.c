@@ -11,39 +11,51 @@
 /* ************************************************************************** */
 
 #include "header.h"
+/*#include <stdio.h>
+#include <stdlib.h>
+
+
+int	ft_strlen(const char *s)
+{
+	int len;
+
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}*/
 
 static	int			calc_num(const char *s, char c)
 {
 	int count;
 	int mot;
+	int i;
 
 	count = 0;
+	i = 0;
 	mot = 0;
 	if (!s)
 		return (0);
-	while (*s != '\0')
+	while (s[i] != '\0')
 	{
-		if (*s == c)
+		if (s[i] == c)
 			mot = 0;
 		else if (mot == 0)
 		{
 			mot = 1;
 			count++;
 		}
-		s++;
+		i++;
 	}
 	return (count);
 }
 
-static	int			long_mot(const char *s, int i, char c)
+static	int			long_mot(char *s, int j, char c)
 {
 	int len;
-	int j;
 
 	len = 0;
-	j = i;
-	i = 0;
-	while (s[j] != c)
+	while (s[j] != c && s[j] != '\0')
 	{
 		len++;
 		j++;
@@ -64,21 +76,27 @@ static	char		**help(const char *s, char c, char **mots)
 	int i;
 	int k;
 	int j;
+	int words;
 
 	i = 0;
 	j = 0;
-	while (s[i] != '\0' && j < calc_num(s, c))
+	words = calc_num(s, c);
+	while (j < words)
 	{
 		k = 0;
-		while (s[i] == c)
+		while (s[i] == c && s[i] != '\0')
 			i++;
-		mots[j] = malloc(sizeof(char) * long_mot(s, i, c) + 1);
-		if (mots[j] == NULL)
+		mots[j] = (char*)malloc(sizeof(char) * (long_mot((char*)s, i, c) + 1));
+		if (!mots[j])
 			return (fr_ee(mots, j));
-		while (s[i] != c)
-			mots[j][k++] = s[i++];
-		mots[j][k] = '\0';
-		j++;
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		while (s[i] != c && s[i] != '\0')
+		{
+			mots[j][k++] = s[i];
+			i++;
+		}	
+		mots[j++][k] = '\0';
 	}
 	mots[j] = 0;
 	return (mots);
@@ -90,8 +108,16 @@ char				**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	mots = malloc(sizeof(char *) * calc_num(s, c) + 1);
+	mots = malloc(sizeof(char *) * (calc_num(s, c) + 1));
 	if (!mots)
 		return (NULL);
 	return (help(s, c, mots));
 }
+/*int main(int argc, char **argv)
+{
+	int i;
+	i = argc;
+
+	printf("\n%d\n",calc_num(argv[1], ' '));
+	return (0);
+}*/

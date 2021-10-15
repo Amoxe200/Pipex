@@ -52,8 +52,18 @@ void parser(char **argv, char **envp, t_list *ag)
     ag->my_path = ft_split(ag->path_envp, ':');
     // split cmd1
     ag->my_cmd = ft_split(argv[2], ' ');
+    int i;
+    i = 0;
+       // printf("%s\n", ag->my_cmd[i]);
+//printf("%s\n", ag->my_cmd[i+1]);
     // split second command
     ag->cmd_two = ft_split(argv[3], ' ');
+     i = 0;
+    /*while (ag->cmd_two[i])
+    {
+        printf("%s\n", ag->cmd_two[i]);
+        i++;
+    }*/
 }
 
 int main(int ac, char **argv, char **envp)
