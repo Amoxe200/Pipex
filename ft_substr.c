@@ -14,8 +14,8 @@
 
 char	*ft_substr(char const *s, int start, size_t len)
 {
-	char			*p;
-	int	i;
+	char	*p;
+	int		i;
 
 	i = 0;
 	if (!s)
@@ -32,12 +32,12 @@ char	*ft_substr(char const *s, int start, size_t len)
 		start++;
 	}
 	p[i] = '\0';
-	return (char *)(p);
+	return ((char *)(p));
 }
 
 int	ft_strlen(const char *s)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (s[len] != '\0')

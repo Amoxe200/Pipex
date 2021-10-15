@@ -14,7 +14,7 @@ NAME = pipex
 CC = gcc
 SRC = main.c split.c ft_substr.c child_one.c utils.c
 ObJ = ${SRC:.c=.o}
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 all: ${NAME}
 

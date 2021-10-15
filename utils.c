@@ -12,35 +12,35 @@
 
 #include "header.h"
 
-int comp_str(char *str1, char *str2)
+int	comp_str(char *str1, char *str2)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str2[i])
-    {
-        if (str1[i] != str2[i])
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-char *find_path(char  **envp)
+char	*find_path(char	**envp)
 {
-    int d;
-    char *str;
-    char *path;
-    
-    d = 0;
-    while (envp[d])
-    {
-        str = envp[d];
-        if (ft_strlen(str) >= 5 && comp_str(str, "PATH="))
-                path = str;
-        d++;
-    }
-    return (path);
+	char	*str;
+	char	*path;
+	int		d;
+
+	d = 0;
+	while (envp[d])
+	{
+		str = envp[d];
+		if (ft_strlen(str) >= 5 && comp_str(str, "PATH="))
+			path = str;
+		d++;
+	}
+	return (path);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -69,4 +69,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	p[i + l1] = '\0';
 	return (p);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s)
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
 }

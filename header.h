@@ -12,34 +12,34 @@
 
 #ifndef HEADER_H
 # define HEADER_H
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/wait.h>
+# include <stdlib.h>
 
-typedef struct s_list 
+typedef struct s_list
 {
-    char *path_envp;
-    char **my_path;
-    char **my_cmd;
-    char **cmd_two;
-    char **envp;
-} t_list;
+	char	*path_envp;
+	char	**my_path;
+	char	**my_cmd;
+	char	**cmd_two;
+	char	**envp;
+}			t_list;
 
-
-int     ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 void	pipex(int f1, int f2, t_list ag, char **argv);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, int start, size_t len);
 char	*ft_strchr(const char *s, int c);
-char	*find_path(char  **envp);
+char	*find_path(char	**envp);
 int		comp_str(char *str1, char *str2);
-void	child_one(int f1, char **argv, int end[2], t_list *ag, char **envp);
-void	child_two(int f2, t_list *ag, int end[2], char **argv, char **envp);
+void	child_one(char **argv, int end[2], t_list *ag, char **envp);
+void	child_two(t_list *ag, int end[2], char **argv, char **envp);
 char	*ft_strjoin(char const *s1, char const *s2);
-
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
